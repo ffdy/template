@@ -1,57 +1,41 @@
 #include<cstdio>
+#include<cstring>
 #include<algorithm>
 using namespace std;
-const int maxn=1e5+5;
-int head[maxn],num;
-struct fy{int to,next;}q[maxn<<1];
-int dfn[maxn],low[maxn],input,fa[maxn],n,m,ans;
+const int maxn=5e4+10;
+int n,m,head[maxn],num,root;
+int dfn[maxn],low[maxn],input;
 bool use[maxn];
-void add(int a,int b)
+struct fy{int to,next;}q[maxn<<2];
+void add(int a,int b){q[++num]=(fy){b,head[a]};head[a]=num;}
+void tar(int a)
 {
-	q[++num]=(fy){b,head[a]};head[a]=num;
-	q[++num]=(fy){a,head[b]};head[b]=num;
-}
-void tar(int a,int b)
-{
-	int ch=0;
 	dfn[a]=low[a]=++input;
+	int cnt=0;
 	for(int i=head[a];i;i=q[i].next)
 	{
-		int c=q[i].to;
-		if(c==b) continue;
-		if(!dfn[c])
+		int b=q[i].to;
+		if(!dfn[b])
 		{
-			fa[c]=a;
-			ch++;
-			tar(c,a);
-			low[a]=min(low[a],low[c]);
-			if(!fa[a]&&ch>=2&&!use[a])
-			{
-				ans++;
-				use[a]=true;
-			}
-			else if(fa[a]&&low[c]>dfn[a]&&!use[a])
-			{
-				ans++;
-				use[a]=true;
-			}
+			cnt++;tar(b);
+			low[a]=min(low[a],low[b]);
+			if((a==root&&cnt>1)||(a!=root&&dfn[a]<=low[b]))use[a]=true;
 		}
-		else low[a]=min(low[a],low[c]);
+		else low[a]=min(low[a],dfn[b]);
 	}
 }
 int main()
 {
-	scanf("%d%d",&n,&m);
+	scanf("%d%d",&n,&m);int a,b;
 	for(int i=1;i<=m;i++)
 	{
-		int x,y;
-		scanf("%d%d",&x,&y);
-		add(x,y);
+		scanf("%d%d",&a,&b);add(a,b);add(b,a);
 	}
-	for(int i=1;i<=n;i++)
-	if(!dfn[i]) tar(i,i);
+	for(int i=1;i<=n;i++)if(!dfn[i])
+	{root=i;tar(i);}
+	int ans=0;
+	for(int i=1;i<=n;i++)if(use[i])ans++;
 	printf("%d\n",ans);
-	for(int i=1;i<=n;i++)
-	if(use[i]) printf("%d ",i);
+	for(int i=1;i<=n;i++)if(use[i])printf("%d ",i);
 	return 0;
 }
