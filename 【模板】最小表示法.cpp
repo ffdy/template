@@ -2,12 +2,12 @@
 #include<algorithm>
 #include<cstring>
 using namespace std;
-const int maxn=3e5+10;
+const int maxn=6e5+10;
 int n,l;
 char str[maxn];
 int main() {
 	scanf("%d",&n);
-	while(n--) {//阿斯顿发生的发
+	while(n--) {//jkdasfjaksfdkaskdfask
 		scanf("%s",str);
 		l=strlen(str);
 		int ll=0,rr=1;
@@ -22,5 +22,6 @@ int main() {
 		}
 		printf("%d\n",ll);
 	}
+//	printf("%d",asdf);
 	return 0;
 }
