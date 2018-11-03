@@ -3,7 +3,7 @@
 #include<cstring>
 #include<queue>
 using namespace std;
-const int maxn=1e6+10;
+const int maxn=5e6+10;
 int rt,n;
 char str[maxn];
 struct fy
