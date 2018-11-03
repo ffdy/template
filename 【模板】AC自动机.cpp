@@ -3,7 +3,7 @@
 #include<cstring>
 #include<queue>
 using namespace std;
-const int maxn=5e6+10;
+const int maxn=2e6+10;
 int rt,n;
 char str[maxn];
 struct fy
@@ -70,6 +70,7 @@ int main()
 		add(str);
 	}
 	ac[0].fail=0;
+	//memset
 	make();
 	scanf("%s",str);
 	printf("%d\n",acm(str));
