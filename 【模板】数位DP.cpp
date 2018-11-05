@@ -7,7 +7,7 @@ int x,y,s[maxn],f[maxn][11][2][2];
 int dp(int w,int n,bool up,bool o)
 {
 	if(w==1)return 1;
-	if(~f[w][n][up][o])return f[w][n][up][0];
+	if(~f[w][n][up][o])return f[w][n][up][o];
 	f[w][n][up][o]=0;
 	int upp=up?s[w-1]:9;
 	for(int i=0;i<=upp;i++)
