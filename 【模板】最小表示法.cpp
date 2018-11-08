@@ -7,7 +7,7 @@ int n,l;
 char str[maxn];
 int main() {
 	scanf("%d",&n);
-	while(n--) {//jkdasfjaksfdkaskdfask
+	while(n--) {
 		scanf("%s",str);
 		l=strlen(str);
 		int ll=0,rr=1;
